@@ -1,0 +1,7 @@
+-- pass: 123
+insert into users(us_id, us_status_konta, us_rodzaj_konta, us_email, us_imie, us_nazwisko, us_login, us_passwd, us_telefon) values (1, 1806273, 1806274, 'adam.bravo@interia.pl', 'Adam', 'Bravo', 'adam.bravo', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', '123123123');
+insert into users(us_id, us_status_konta, us_rodzaj_konta, us_email, us_imie, us_nazwisko, us_login, us_passwd, us_telefon) values (2, 1806273, 1806273, 'adam.test@interia.pl', 'adam', 'test', 'adam.test', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', '123123666');
+insert into users(us_id, us_status_konta, us_rodzaj_konta, us_email, us_imie, us_nazwisko, us_login, us_passwd, us_telefon) values (666, 1806273, 1806273, 'klient nasz Pan', 'Klient', 'Paweł', 'spuer.klient', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', '333444555');
+
+insert into leady_comp(LC_ID, LC_EXPECTED_SERVICE_ID, LC_RECOMMENDATION_STATUS_ID, LC_ORDER_STATUS_ID, LC_TELL_NUMBER, LC_COMPANY_NAME, LC_CONTACT_PERSON, LC_CONTACT_PERSON_PHONE, LC_USER_ID, lc_creation_date)
+values (1, 1798539, 1798543, 1798546, 'TEL000000000000', 'JanuszeX', 'Andrszej mierzwa', '123123123', 666, 20111218131717);

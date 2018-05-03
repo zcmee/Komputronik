@@ -1,0 +1,50 @@
+security.basic.enabled: false
+spring.thymeleaf.mode: LEGACYHTML5
+application-version: 1.0.0
+
+spring:
+  profiles.active: development
+---
+spring:
+  profiles: development
+  datasource:
+    jdbc-url: jdbc:mysql://localhost:3306/spring?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false
+    username: root
+    password: 123456asd
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    connection-timeout: 30000 #30sec
+    maximum-pool-size: 10
+    minimum-idle: 1 #one extra idle connection
+    idle-timeout: 20000 #2min
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        type: trace
+        synonyms: true
+---
+spring:
+  profiles: test
+  datasource:
+    url: jdbc:h2:file:~/test;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    validationQuery: SELECT 1
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /consoleta
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+server:
+  port: 9020
+  session:
+    timeout: 1800 # session timeout in second
+    cookie.max-age: 1800
