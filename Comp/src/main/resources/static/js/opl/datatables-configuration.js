@@ -67,7 +67,6 @@ $(document).ready(function() {
           },
           "columns" : [
             {'data': 'id'},
-            {'data': 'creationUser'},
             {'data': 'creationDate'},
             {'data': 'companyName'},
             {'data': 'nip'},
