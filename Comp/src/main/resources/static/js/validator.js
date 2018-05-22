@@ -75,7 +75,7 @@ var Validator = (function () {
         else
         {
             var dig = (""+pesel).split("");
-            var kontrola = (1*parseInt(dig[0]) + 3*parseInt(dig[1]) + 7*parseInt(dig[2]) + 9*parseInt(dig[3]) + 1*parseInt(dig[4]) + 3*parseInt(dig[5]) + 7*parseInt(dig[6]) + 9*parseInt(dig[7]) + 1*parseInt(dig[8]) + 3*parseInt(dig[9]))%10;
+            var kontrola = (parseInt(dig[0]) + 3*parseInt(dig[1]) + 7*parseInt(dig[2]) + 9*parseInt(dig[3]) + parseInt(dig[4]) + 3*parseInt(dig[5]) + 7*parseInt(dig[6]) + 9*parseInt(dig[7]) + parseInt(dig[8]) + 3*parseInt(dig[9]))%10;
             if(kontrola === 0) kontrola = 10;
             kontrola = 10 - kontrola;
             if(parseInt(dig[10]) === kontrola)
@@ -89,7 +89,7 @@ var Validator = (function () {
         bankAccount = bankAccount.replace(/[^0-9]+/g, '');
         var wagi = new Array(1, 10, 3, 30, 9, 90, 27, 76, 81, 34, 49, 5, 50, 15, 53, 45, 62, 38, 89, 17, 73, 51, 25, 56, 75, 71, 31, 19, 93, 57);
 
-        if (bankAccount.length == 26) {
+        if (bankAccount.length === 26) {
             bankAccount = bankAccount + "2521";
             bankAccount = bankAccount.substr(2) + bankAccount.substr(0, 2);
             var Z = 0;
