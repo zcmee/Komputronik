@@ -45,7 +45,6 @@ public class GlobalExceptionHandler {
         PrintWriter pw = new PrintWriter(sw);
         exception.printStackTrace(pw);
         String sStackTrace = sw.toString();
-        System.out.println(sStackTrace);
         logger.error(sStackTrace,exception);
     }
 

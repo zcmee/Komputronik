@@ -21,8 +21,8 @@ public enum OrderStatus {
     }
 
     static {
-        for (OrderStatus OrderStatus : OrderStatus.values()) {
-            orderStatusMap.put(OrderStatus.getValue(), OrderStatus);
+        for (OrderStatus orderStatus : OrderStatus.values()) {
+            orderStatusMap.put(orderStatus.getValue(), orderStatus);
         }
     }
 

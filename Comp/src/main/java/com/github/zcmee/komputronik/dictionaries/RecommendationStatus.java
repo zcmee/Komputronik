@@ -3,10 +3,7 @@ package com.github.zcmee.komputronik.dictionaries;
 import com.fasterxml.jackson.annotation.JsonValue;
 import org.hibernate.envers.tools.Pair;
 
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public enum RecommendationStatus {
     NEW(1798542, "Nowy"),
@@ -19,7 +16,7 @@ public enum RecommendationStatus {
     private final int value;
     private final String describe;
     private static final Map<Integer, RecommendationStatus> recommendationStatusMap = new HashMap<>();
-    public static final Set<RecommendationStatus> ACTIVE_STATUSES = EnumSet.of(ORDER, ACCEPTED_BY_CLIENT, RESIGNATION);
+    public static final Set<RecommendationStatus> ACTIVE_STATUSES = Collections.unmodifiableSet(EnumSet.of(ORDER, ACCEPTED_BY_CLIENT, RESIGNATION));
 
     RecommendationStatus(Integer value, String describe) {
         this.value = value;
@@ -27,8 +24,8 @@ public enum RecommendationStatus {
     }
 
     static {
-        for (RecommendationStatus RecommendationStatus : RecommendationStatus.values()) {
-            recommendationStatusMap.put(RecommendationStatus.getValue(), RecommendationStatus);
+        for (RecommendationStatus recommendationStatus : RecommendationStatus.values()) {
+            recommendationStatusMap.put(recommendationStatus.getValue(), recommendationStatus);
         }
     }
 

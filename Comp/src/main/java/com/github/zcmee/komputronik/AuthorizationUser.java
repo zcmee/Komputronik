@@ -17,7 +17,6 @@ public class AuthorizationUser implements UserDetails {
     private final List<? extends GrantedAuthority> authorities;
 
     public AuthorizationUser(User user) {
-        System.out.println(user);
         password = user.getPassword();
         login = user.getLogin();
 

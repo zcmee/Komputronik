@@ -20,4 +20,22 @@ public class AuditedRevisionEntity extends DefaultRevisionEntity {
     public void setLogin(String login) {
         this.login = login;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        AuditedRevisionEntity that = (AuditedRevisionEntity) o;
+
+        return login != null ? login.equals(that.login) : that.login == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (login != null ? login.hashCode() : 0);
+        return result;
+    }
 }
