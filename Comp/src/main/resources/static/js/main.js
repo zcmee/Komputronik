@@ -23,3 +23,15 @@ toastr.options = {
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 }
+
+Handlebars.registerHelper('select', function( value, options ){
+    var $el = $('<select />').html( options.fn(this) );
+    $el.find('[value="' + value + '"]').attr({'selected':'selected'});
+    return $el.html();
+});
+
+Handlebars.registerHelper('dateFormatter', function(date){
+    alert(date);
+    if(date !== null) {return moment(date).format("YYYY-MM-DD"); }
+    return '';
+});

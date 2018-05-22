@@ -81,6 +81,15 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!-- WEBJARS -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>handlebars</artifactId>
+            <version>4.0.11</version>
+        </dependency>
+
+        <!-- /WEBJARS -->
     </dependencies>
     <build>
         <plugins>

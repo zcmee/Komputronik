@@ -19,7 +19,6 @@ public class CompLeadController {
         this.compLeadService = compLeadService;
     }
 
-    @GetMapping("all")
     public List<CompLead> findAll() {
         return compLeadService.findAll();
     }
@@ -47,7 +46,7 @@ public class CompLeadController {
         return compLeadService.save(compLead);
     }
 
-    @PostMapping("update/or")
+    @PutMapping("update/or")
     public CompLead update(@Valid @ModelAttribute CompLeadOrDTO compLeadOrDTO) {
         CompLead compLead = compLeadService.findById(compLeadOrDTO.getId());
         compLead.updateLead(compLeadOrDTO);

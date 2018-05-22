@@ -74,8 +74,6 @@ $(document).ready(function() {
             {'data': 'companyName'},
             {'data': 'nip'},
             {'data': 'contactPerson'},
-            {'data': 'zipCode'},
-            {'data': 'installationAddress'},
             {'data': 'contactPersonPhone'},
             {'data': 'recommendationStatus'},
             {'data': 'orderStatus'},
@@ -83,41 +81,37 @@ $(document).ready(function() {
             {'data': 'expectedService'},
             {'data': 'expectedInstallationDate'}
         ],
-    } );
+    });
 
      $('#example tbody').on('click', 'td:not(:first-child)', function (e) {
         var data = table.row( $(this).parent() ).data();
         var compId = data['id'];
+
         $("#error-message").removeClass("alert-success")
                            .removeClass("alert-danger")
                            .html("");
 
         $.get( "compleads/" + compId, function( data ) {
-            var fullUserName = data.user.firstName + " " + data.user.lastName;
-
-            $("#comp-lead-modal #id-complaint").html(data.id);
-            $("#comp-lead-modal #creation-user").val(fullUserName);
-            $("#comp-lead-modal #id-tel").val(data.idTel);
-            $("#comp-lead-modal #nip").val(data.nip);
-            $("#comp-lead-modal #company-name").val(data.companyName);
-            $("#comp-lead-modal #id").val(data.id);
-            $("#comp-lead-modal #contact-person").val(data.contactPerson);
-            $("#comp-lead-modal #contact-person-phone").val(data.contactPersonPhone);
-            $("#comp-lead-modal #excepted-service").val(data.expectedService.first).change();
-            $("#comp-lead-modal #order-status").val(data.orderStatus.first).change();
-            $("#comp-lead-modal #recommendation-status").val(data.recommendationStatus.first).change();
-            $("#comp-lead-modal #creation-date").val(moment(data.creationDate).format("YYYY-MM-DD"));
-            if(data.expectedInstallationDate !== null) {
-                $("#comp-lead-modal #expected-installation-date").val(moment(data.expectedInstallationDate).format("YYYY-MM-DD"));
-            } else {
-                $("#comp-lead-modal #expected-installation-date").val('');
-            }
+            $('.modal-container').load("components/or/change-order.hbs",function(template) {
+                var template = Handlebars.compile(template);
+                $(this).html(template(data));
+                $('.datepicker').datepicker({
+                    autoclose: true,
+                    format: "yyyy-mm-dd",
+                    todayBtn: false,
+                    startDate: '+1d',
+                    orientation: "auto",
+                    todayHighlight: true
+                });
+                $('#modal-change-order').modal({show:true});
+            });
+        }).fail(function() {
+            toastr.error('Nie udało się pobrać szczegółów zgłoszenia');
         });
 
-        $('#comp-lead-modal').modal({show:true});
      });
 
-    $("#send").click(function (e) {
+    $('.modal-container').on('click', '#send', function (e) {
         var expectedInstallationDate = $("#expected-installation-date").val();
         if(expectedInstallationDate.length === 0)  {
             $("#error-message").html("Preferowana data instalacji jest polem wymagana").addClass("alert alert-danger");
@@ -126,9 +120,9 @@ $(document).ready(function() {
 
         sendFormByAjax('form', false, function() {
             $("#error-message").html("<div>Zdarzenie zostało poprawnie zapisane w bazie danych</div> <div>Za trzy sekundy samoczynnie okno się zamknie</div>").removeClass("alert-danger").addClass("alert alert-success");
-            $("#comp-lead-modal").scrollTop($('#error-message').offset().top);
+            $("#modal-change-order").scrollTop($('#error-message').offset().top);
             colseModalWindowTimeout = setTimeout(function(){
-               $('#comp-lead-modal').modal('toggle');
+               $('#modal-change-order').modal('toggle');
             }, 2900);
             setTimeout(function(){
                table.ajax.reload();
@@ -137,9 +131,9 @@ $(document).ready(function() {
         });
     });
 
-    $(".close-event").click(function (e) {
-         clearTimeout(colseModalWindowTimeout);
-        $('#comp-lead-modal').modal('toggle');
+    $('.modal-container').on('click', '.close-event', function (e) {
+        clearTimeout(colseModalWindowTimeout);
+        $('#modal-change-order').modal('toggle');
     });
 
  });

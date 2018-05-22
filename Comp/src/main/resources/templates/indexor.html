@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <title>Comp</title>
+    <title>Komputronik - OR</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
@@ -51,8 +51,6 @@
                     <th>Nazwa firmy: </th>
                     <th>Nip: </th>
                     <th>Osoba kontaktowa: </th>
-                    <th>Miasto, kod pocztowy: </th>
-                    <th>Adres instalacji: </th>
                     <th>Nr telefonu: </th>
                     <th>Status Comp: </th>
                     <th>Stan OPL: </th>
@@ -66,6 +64,10 @@
     </div>
 </div>
 
+
+<!-- Add/Update Lead -->
+<button id="add-lead">Dodaj</button>
+
 <!-- Footer -->
 <footer class="container-fluid">
     <div class="color-black">
@@ -73,139 +75,16 @@
     </div>
 </footer>
 
-<!-- Modal -->
-<div id="comp-lead-modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog  modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Szczegóły polecenia <b>#<span id="id-complaint"></span> </b></h5>
-                <button type="button" class="close close-event" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="error-message"></div>
-                <form id="form" method="post" action="compleads/update/or">
-                    <div class="row">
-                        <input id="id" type="hidden" name="id" />
-                        <div class="col-lg-4 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label for="creation-user">Autor zgłoszenia:</label>
-                                <input id="creation-user" type="text" class="form-control" readonly/>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label for="creation-date">Data utworzenia:</label>
-                                <input id="creation-date" type="text" class="form-control" readonly/>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label for="company-name">Nazwa firmy:</label>
-                                <input id="company-name" type="text" class="form-control" readonly />
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label for="nip">Nip:</label>
-                                <input id="nip" type="text" class="form-control" readonly/>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label for="contact-person">Osoba kontaktowa:</label>
-                                <input id="contact-person" type="text" class="form-control" readonly />
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label for="city-zip-code">Miasto, kod pocztowy:</label>
-                                <input id="city-zip-code" type="text" class="form-control" readonly />
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label for="installation-address">Adres instalacji: </label>
-                                <input id="installation-address" type="text" class="form-control" readonly/>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label for="contact-person-phone">Nr Telefonu:</label>
-                                <input id="contact-person-phone" type="text" class="form-control" readonly />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="fields-for-complete">
-                        Dane uzupełnione przez OPL
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-xs-12">
-                            <label for="order-status">Stan OPL:</label>
-                            <select id="order-status" class="form-control" name="orderStatus" disabled>
-                                <option value="1798552">Nowy</option>
-                                <option value="1798545">Realizacja</option>
-                                <option value="1798546">Anulacja</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label for="id-tel">Nr TEL:</label>
-                                <input id="id-tel" type="text" class="form-control" maxlength="15" readonly />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="fields-for-complete">
-                        Dane do uzupełnienia przez Comp
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label for="excepted-service">Oczekiwana usługa:</label>
-                                <select id="excepted-service" class="form-control" name="expectedService">
-                                    <option value="1798539">Mobile</option>
-                                    <option value="1798540">Fix - Bezpłatny</option>
-                                    <option value="1798541">Fix - Instalacja płatna</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label for="recommendation-status">Status Comp:</label>
-                                <select id="recommendation-status" class="form-control" name="recommendationStatus">
-                                    <option value="1807159">Zaakceptowane przez klienta</option>
-                                    <option value="1807160">Odrzucone przez klienta</option>
-                                    <option value="1798543">Zamówienie</option>
-                                    <option value="1798544">Rezygnacja</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label for="expected-installation-date" class="control-label">Preferowana data instalacji:</label>
-                                <div class="input-group date datepicker" data-provide="datepicker">
-                                    <input id="expected-installation-date" type="text" class="form-control" name="expectedInstallationDate" readonly style="background-color:white;"/>
-                                    <div class="input-group-addon">
-                                        <span class="glyphicon glyphicon-th"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button id="close" type="button" class="btn btn-secondary close-event">Zamknij</button>
-                <button id="send" type="button" class="btn btn-primary">Zapisz</button>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- Modal Window with change of order status -->
+<div class="modal-container"></div>
+
 
 <!-- Jquery core Library -->
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
+
+<!-- Plugin Handlebars --  -->
+<script src="webjars/handlebars/4.0.11/handlebars.min.js"></script>
 
 <!-- Plugin Moment.js -- Parse, validate, manipulate, and display dates and times in JavaScript. -->
 <script src="js/moment.min.js"></script>
@@ -233,17 +112,6 @@
 
 <!-- Own DataTables configuration -->
 <script src="js/or/datatables-configuration.js"></script>
-
-<script>
-$('.datepicker').datepicker({
-    autoclose: true,
-    format: "yyyy-mm-dd",
-    todayBtn: false,
-    startDate: '+1d',
-    orientation: "auto",
-    todayHighlight: true
-});
-</script>
 
 </body>
 </html>
