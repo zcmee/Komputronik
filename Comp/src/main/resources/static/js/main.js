@@ -31,7 +31,6 @@ Handlebars.registerHelper('select', function( value, options ){
 });
 
 Handlebars.registerHelper('dateFormatter', function(date){
-    alert(date);
     if(date !== null) {return moment(date).format("YYYY-MM-DD"); }
     return '';
 });

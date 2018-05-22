@@ -23,15 +23,12 @@ public class AuthorizationUser implements UserDetails {
 
         switch(user.getAccountType()) {
             case COMP_INSTALATOR :
-                System.out.println("COMP");
                 authorities = Collections.singletonList(new SimpleGrantedAuthority("USER_OR"));
             break;
             case COMP_OPL :
-                System.out.println("OPL");
                 authorities = Collections.singletonList(new SimpleGrantedAuthority("USER_OPL"));
             break;
             default:
-                System.out.println("INNE");
                 authorities = Collections.emptyList();
         }
 
