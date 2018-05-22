@@ -11,10 +11,12 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+.idea/sonarlint/
+*.idea
 *.iws
 *.iml
 *.ipr
+
 
 ### NetBeans ###
 nbproject/private/
