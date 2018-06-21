@@ -10,14 +10,17 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import org.modelmapper.ModelMapper;
 
 @RestController
 @RequestMapping("compleads")
 public class CompLeadController {
     private final CompLeadService compLeadService;
+    private final ModelMapper modelMapper;
 
-    public CompLeadController(CompLeadService compLeadService) {
+    public CompLeadController(CompLeadService compLeadService, ModelMapper modelMapper) {
         this.compLeadService = compLeadService;
+        this.modelMapper = modelMapper;
     }
 
     public List<CompLead> findAll() {
@@ -42,7 +45,8 @@ public class CompLeadController {
 
     @PostMapping("add")
     public void add(@Valid @ModelAttribute CompLeadAddDTO compLeadAddDTO) {
-        System.out.println(compLeadAddDTO);
+        CompLead compLead = modelMapper.map(compLeadAddDTO, CompLead.class);
+        System.out.println(compLead);
     }
 
     @PostMapping("update/opl")
