@@ -6,6 +6,32 @@ function footer() {
     $('[data-toggle="tooltip"]').tooltip();
 }
 
+function addPositiveMessage(message) {
+   addMessage(message, "success")
+}
+
+function addNegativeMessage(message) {
+   addMessage(message, "danger")
+}
+
+function addMessage(message, type) {
+    var $tmp =  $("#show-message");
+    $tmp.addClass("alert");
+    $tmp.removeClass("alert-success").removeClass("alert-danger");
+    if(type === "success") {
+        $tmp.addClass("alert-success");
+    } else if(type === "danger") {
+        $tmp.addClass("alert-danger");
+    }
+    $tmp.html(message);
+}
+
+function cleanMessage() {
+    $("#show-message").removeClass(" alert-success")
+                      .removeClass("alert-danger")
+                      .html("");
+}
+
 toastr.options = {
   "closeButton": true,
   "debug": false,

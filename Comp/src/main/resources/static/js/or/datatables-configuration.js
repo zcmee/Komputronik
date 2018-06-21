@@ -42,7 +42,7 @@ $(document).ready(function() {
                         }
                     }
                 ],
-          'ajax'     : {
+            'ajax'     : {
             "url"    : "compleads/reccomendationstatus/active",
             "type"   : "get",
             "dataSrc": function (json) {
@@ -86,15 +86,13 @@ $(document).ready(function() {
      $('#example tbody').on('click', 'td:not(:first-child)', function (e) {
         var data = table.row( $(this).parent() ).data();
         var compId = data['id'];
-
-        $("#error-message").removeClass("alert-success")
-                           .removeClass("alert-danger")
-                           .html("");
+        cleanMessage();
 
         $.get( "compleads/" + compId, function( data ) {
             $('.modal-container').load("components/or/change-order.hbs",function(template) {
                 var template = Handlebars.compile(template);
                 $(this).html(template(data));
+
                 $('.datepicker').datepicker({
                     autoclose: true,
                     format: "yyyy-mm-dd",
@@ -111,16 +109,19 @@ $(document).ready(function() {
 
      });
 
-    $('.modal-container').on('click', '#send', function (e) {
+    $('.modal-container').on('click', '#modal-change-order #send', function (e) {
+        e.preventDefault();
         var expectedInstallationDate = $("#expected-installation-date").val();
         if(expectedInstallationDate.length === 0)  {
-            $("#error-message").html("Preferowana data instalacji jest polem wymagana").addClass("alert alert-danger");
+            addNegativeMessage("Preferowana data instalacji jest polem wymagana");
+//            $("#error-message").html().addClass("alert alert-danger");
             return;
         }
 
         sendFormByAjax('form', false, function() {
             $("#error-message").html("<div>Zdarzenie zostało poprawnie zapisane w bazie danych</div> <div>Za trzy sekundy samoczynnie okno się zamknie</div>").removeClass("alert-danger").addClass("alert alert-success");
-            $("#modal-change-order").scrollTop($('#error-message').offset().top);
+
+            $("#modal-change-order").scrollTop($('#show-message').offset().top);
             colseModalWindowTimeout = setTimeout(function(){
                $('#modal-change-order').modal('toggle');
             }, 2900);
@@ -136,4 +137,27 @@ $(document).ready(function() {
         $('#modal-change-order').modal('toggle');
     });
 
+    $('.modal-container').on('click', '.close-event', function (e) {
+        clearTimeout(colseModalWindowTimeout);
+        $('#modal-change-order').modal('toggle');
+    });
+
+    $("#add-lead").click(function(){
+        $('.modal-container').load("components/or/add-order.html", function(){
+            $('#modal-add-order').modal({show:true});
+        });
+    });
+
+    $('.modal-container').on('click', '#modal-add-order #send', function (e) {
+        //new Validator().valid()
+        if(1) {
+            sendFormByAjax('form', false, function() {
+                addPositiveMessage("Dane zostały prawidłowo zapisane w bazie danych");
+            });
+        } else {
+            addNegativeMessage("Uzupełnij poprawnie formularz");
+        }
+    });
+
  });
+

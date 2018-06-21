@@ -1,6 +1,7 @@
 package com.github.zcmee.komputronik.controllers;
 
 import com.github.zcmee.komputronik.dictionaries.RecommendationStatus;
+import com.github.zcmee.komputronik.dtos.CompLeadAddDTO;
 import com.github.zcmee.komputronik.dtos.CompLeadOplDTO;
 import com.github.zcmee.komputronik.dtos.CompLeadOrDTO;
 import com.github.zcmee.komputronik.entities.CompLead;
@@ -37,6 +38,11 @@ public class CompLeadController {
     @GetMapping("{id}")
     public CompLead findById(@PathVariable Long id) {
         return compLeadService.findById(id);
+    }
+
+    @PostMapping("add")
+    public void add(@Valid @ModelAttribute CompLeadAddDTO compLeadAddDTO) {
+        System.out.println(compLeadAddDTO);
     }
 
     @PostMapping("update/opl")

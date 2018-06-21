@@ -19,10 +19,11 @@ function sendFormByAjax(idForm, isAttachment, fun) {
             fun(datax);
         },
         error: function(xhr) {
-            var $element = $("#error-message");
+            var $element = $("#show-message");
             if ($element.length && xhr.status < 500) {
-                $element.show();
-                $element.empty().append('<strong>Błąd!</strong><BR/> ' + xhr.responseText).addClass("alert alert-danger");
+                addNegativeMessage(xhr.responseText);
+//                $element.show();
+//                $element.empty().append('<strong>Błąd!</strong><BR/> ' + xhr.responseText).addClass("alert alert-danger");
             }
 
         },
@@ -31,8 +32,9 @@ function sendFormByAjax(idForm, isAttachment, fun) {
         },
         statusCode: {
             500: function() {
-                $("#error-message").empty()
-                                   .append('Funkcjonalość chwilowo niedostępna. Proszę spróbować później.');
+                addNegativeMessage('Funkcjonalość chwilowo niedostępna. Proszę spróbować później.');
+//                $("#show-message").empty()
+//                                  .append('Funkcjonalość chwilowo niedostępna. Proszę spróbować później.');
             }
         }
     });
