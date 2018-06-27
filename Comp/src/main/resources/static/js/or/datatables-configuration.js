@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     var colseModalWindowTimeout;
     var table = $('#example').DataTable({
           "order": [[2, "desc" ]],
@@ -16,14 +15,14 @@ $(document).ready(function() {
                         extend: 'copyHtml5',
                         text: '<i class="fa fa-clipboard"></i> Kopiuj do Schowka',
                         exportOptions: {
-                            columns: '0, 1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 11, 12, 13'
+                            columns: '0, 1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 11'
                         }
                     },
                     {
                         extend: 'excelHtml5',
                         text: '<i class="fa fa-file-excel-o"></i> Eksport do Excel',
                         exportOptions: {
-                            columns: '0, 1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 11, 12, 13'
+                            columns: '0, 1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 11'
                         }
                     },
                     {
@@ -32,7 +31,7 @@ $(document).ready(function() {
                         bom: true,
                         text: '<i class="fa fa-file-text-o"></i> Eksport do CSV',
                         exportOptions: {
-                            columns: '0, 1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 11, 12, 13'
+                            columns: '0, 1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 11'
                         }
                     },
                     {
@@ -114,18 +113,16 @@ $(document).ready(function() {
         var expectedInstallationDate = $("#expected-installation-date").val();
         if(expectedInstallationDate.length === 0)  {
             addNegativeMessage("Preferowana data instalacji jest polem wymagana");
-//            $("#error-message").html().addClass("alert alert-danger");
             return;
         }
 
         sendFormByAjax('form', false, function() {
-            $("#error-message").html("<div>Zdarzenie zostało poprawnie zapisane w bazie danych</div> <div>Za trzy sekundy samoczynnie okno się zamknie</div>").removeClass("alert-danger").addClass("alert alert-success");
-
+            addPositiveMessage("<div>Zdarzenie zostało poprawnie zapisane w bazie danych</div> <div>Za trzy sekundy samoczynnie okno się zamknie</div>");
             $("#modal-change-order").scrollTop($('#show-message').offset().top);
             colseModalWindowTimeout = setTimeout(function(){
                $('#modal-change-order').modal('toggle');
             }, 2900);
-            setTimeout(function(){
+            setTimeout(function() {
                table.ajax.reload();
                toastr.success('Aktualizacja danych w tabeli przebiegła poprawnie');
             }, 3000);
@@ -134,12 +131,7 @@ $(document).ready(function() {
 
     $('.modal-container').on('click', '.close-event', function (e) {
         clearTimeout(colseModalWindowTimeout);
-        $('#modal-change-order').modal('toggle');
-    });
-
-    $('.modal-container').on('click', '.close-event', function (e) {
-        clearTimeout(colseModalWindowTimeout);
-        $('#modal-change-order').modal('toggle');
+        $('#modal-change-order, #modal-add-order').modal('toggle');
     });
 
     $("#add-lead").click(function(){
@@ -149,8 +141,7 @@ $(document).ready(function() {
     });
 
     $('.modal-container').on('click', '#modal-add-order #send', function (e) {
-        //new Validator().valid()
-        if(1) {
+        if(new Validator().valid()) {
             sendFormByAjax('form', false, function() {
                 addPositiveMessage("Dane zostały prawidłowo zapisane w bazie danych");
             });
