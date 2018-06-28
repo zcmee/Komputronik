@@ -8,7 +8,6 @@ import com.github.zcmee.komputronik.dtos.CompLeadAddDTO;
 import com.github.zcmee.komputronik.dtos.CompLeadOplDTO;
 import com.github.zcmee.komputronik.dtos.CompLeadOrDTO;
 import com.github.zcmee.komputronik.entities.CompLead;
-import com.github.zcmee.komputronik.entities.User;
 import com.github.zcmee.komputronik.services.CompLeadService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;

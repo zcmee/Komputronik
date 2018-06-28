@@ -20,9 +20,6 @@ public class CompLeadAddDTO implements Serializable {
     @NotEmpty(message = "Nip jest polem obowiązkowym")
     private String nip;
 
-    public CompLeadAddDTO() {
-    }
-
     public String getContactPerson() {
         return contactPerson;
     }
