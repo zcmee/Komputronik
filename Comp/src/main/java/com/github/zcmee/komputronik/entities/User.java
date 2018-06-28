@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Objects;
 
 
 @Entity
@@ -19,7 +20,7 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "US_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotNull(message = "Login jest polem obowiązkowym")
     @Size(min = 3, max = 100, message = "Login musi zawierać się pomiędzy 3-10 znaków")
@@ -80,11 +81,11 @@ public class User implements Serializable {
         // default constructor
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -190,6 +191,32 @@ public class User implements Serializable {
 
     public void setAccountStatus(Integer accountStatus) {
         this.accountStatus = accountStatus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) &&
+                Objects.equals(login, user.login) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(phone, user.phone) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(city, user.city) &&
+                Objects.equals(street, user.street) &&
+                Objects.equals(building, user.building) &&
+                Objects.equals(flat, user.flat) &&
+                Objects.equals(zipCode, user.zipCode) &&
+                Objects.equals(accountType, user.accountType) &&
+                Objects.equals(accountStatus, user.accountStatus);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, login, firstName, lastName, password, phone, email, city, street, building, flat, zipCode, accountType, accountStatus);
     }
 
     @Override

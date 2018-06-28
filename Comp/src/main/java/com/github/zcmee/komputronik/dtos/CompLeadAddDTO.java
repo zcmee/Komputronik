@@ -2,16 +2,17 @@ package com.github.zcmee.komputronik.dtos;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class CompLeadAddDTO {
+import javax.validation.constraints.Pattern;
+import java.io.Serializable;
+
+public class CompLeadAddDTO implements Serializable {
 
     @NotEmpty(message = "Pole mię jest polem obowiązkowym")
-    private String firstName;
-
-    @NotEmpty(message = "Pole nazwisko jest polem obowiązkowym")
-    private String lastName;
+    private String contactPerson;
 
     @NotEmpty(message = "Numer telefonu jest polem obowiązkowym")
-    private String phone;
+    @Pattern(regexp = "[1-9][0-9]{8}", message = "Podany numer telefonu jest nieprawidłowy")
+    private String contactPersonPhone;
 
     @NotEmpty(message = "Nazwa firmy jest polem obowiązkowym")
     private String companyName;
@@ -19,28 +20,23 @@ public class CompLeadAddDTO {
     @NotEmpty(message = "Nip jest polem obowiązkowym")
     private String nip;
 
-    public String getFirstName() {
-        return firstName;
+    public CompLeadAddDTO() {
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public String getContactPerson() {
+        return contactPerson;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setContactPerson(String contactPerson) {
+        this.contactPerson = contactPerson;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getContactPersonPhone() {
+        return contactPersonPhone;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setContactPersonPhone(String contactPersonPhone) {
+        this.contactPersonPhone = contactPersonPhone;
     }
 
     public String getCompanyName() {
@@ -62,11 +58,11 @@ public class CompLeadAddDTO {
     @Override
     public String toString() {
         return "CompLeadAddDTO{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phone='" + phone + '\'' +
+                "contactPerson='" + contactPerson + '\'' +
+                ", contactPersonPhone='" + contactPersonPhone + '\'' +
                 ", companyName='" + companyName + '\'' +
                 ", nip='" + nip + '\'' +
                 '}';
     }
+
 }

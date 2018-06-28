@@ -3,8 +3,9 @@ package com.github.zcmee.komputronik.dtos;
 import com.github.zcmee.komputronik.dictionaries.OrderStatus;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-public class CompLeadOplDTO {
+public class CompLeadOplDTO implements Serializable {
     @NotNull(message = "Pole id polecenia jest polem obowiązkowym")
     private Long id;
 

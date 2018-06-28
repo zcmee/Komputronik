@@ -10,15 +10,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class AuthorizationUser implements UserDetails {
-
-    private final String password;
-    private final String login;
-
+    private final User user;
     private final List<? extends GrantedAuthority> authorities;
 
     public AuthorizationUser(User user) {
-        password = user.getPassword();
-        login = user.getLogin();
+        this.user = user;
 
         switch(user.getAccountType()) {
             case COMP_INSTALATOR :
@@ -40,12 +36,12 @@ public class AuthorizationUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.password;
+        return this.user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return this.login;
+        return this.user.getLogin();
     }
 
     @Override
@@ -67,5 +63,10 @@ public class AuthorizationUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public User getUser() {
+        return user;
+    }
+
 }
 

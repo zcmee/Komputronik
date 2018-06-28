@@ -31,6 +31,7 @@ public class CompLead implements Serializable {
 
     @Id
     @Column(name = "LC_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)

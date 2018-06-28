@@ -9,9 +9,10 @@ import com.github.zcmee.komputronik.dictionaries.RecommendationStatus;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 
-public class CompLeadOrDTO {
+public class CompLeadOrDTO implements Serializable {
     @NotNull(message = "Pole id polecenia jest polem obowiązkowym")
     private Long id;
 

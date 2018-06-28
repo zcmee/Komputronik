@@ -6,36 +6,33 @@ import org.hibernate.envers.RevisionEntity;
 import com.github.zcmee.komputronik.listeners.AuditingRevisionListener;
 
 import javax.persistence.Entity;
+import java.util.Objects;
 
 @Entity
 @RevisionEntity(AuditingRevisionListener.class)
 public class AuditedRevisionEntity extends DefaultRevisionEntity {
     private static final long serialVersionUID = 1L;
-    private String login;
+    private Long userId;
 
-    public String getLogin() {
-        return login;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof AuditedRevisionEntity)) return false;
         if (!super.equals(o)) return false;
-
         AuditedRevisionEntity that = (AuditedRevisionEntity) o;
-
-        return login != null ? login.equals(that.login) : that.login == null;
+        return Objects.equals(userId, that.userId);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (login != null ? login.hashCode() : 0);
-        return result;
+        return Objects.hash(super.hashCode(), userId);
     }
 }
