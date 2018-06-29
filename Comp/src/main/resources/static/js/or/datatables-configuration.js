@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var colseModalWindowTimeout;
-    var table = $('#example').DataTable({
+    var $table = $('#example').DataTable({
           "order": [[2, "desc" ]],
           responsive: true,
           "oLanguage": {
@@ -37,7 +37,7 @@ $(document).ready(function() {
                     {
                         text: '<i class="fa fa-refresh"></i> Odśwież',
                         action: function ( e, dt, node, config ) {
-                            table.ajax.reload();
+                            $table.ajax.reload();
                         }
                     }
                 ],
@@ -83,7 +83,7 @@ $(document).ready(function() {
     });
 
      $('#example tbody').on('click', 'td:not(:first-child)', function (e) {
-        var data = table.row( $(this).parent() ).data();
+        var data = $table.row( $(this).parent() ).data();
         var compId = data['id'];
         cleanMessage();
 
@@ -123,7 +123,7 @@ $(document).ready(function() {
                $('#modal-change-order').modal('toggle');
             }, 2900);
             setTimeout(function() {
-               table.ajax.reload();
+               $table.ajax.reload();
                toastr.success('Aktualizacja danych w tabeli przebiegła poprawnie');
             }, 3000);
         });
@@ -143,7 +143,8 @@ $(document).ready(function() {
     $('.modal-container').on('click', '#modal-add-order #send', function (e) {
         if(new Validator().valid()) {
             sendFormByAjax('form', false, function() {
-                addPositiveMessage("Dane zostały prawidłowo zapisane w bazie danych");
+                addPositiveMessage("Dane zostały prawidłowo zapisane w bazie danych.</br>Możesz dodać kolejne zgłoszenie lub zamknąć okno.");
+                $table.ajax.reload();
             });
         } else {
             addNegativeMessage("Uzupełnij poprawnie formularz");
