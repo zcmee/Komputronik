@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
@@ -41,17 +40,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public void handle(Exception exception) throws IOException {
-        
-        try(
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw)
-        ){
-            exception.printStackTrace(pw);
-            String sStackTrace = sw.toString();
-            logger.error(sStackTrace,exception);
-        }
-
+    public void handle(Exception exception) {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        exception.printStackTrace(pw);
+        String sStackTrace = sw.toString();
+        logger.error(sStackTrace,exception);
     }
 
 }
