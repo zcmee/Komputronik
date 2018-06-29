@@ -15,6 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -58,6 +59,7 @@ public class CompLeadController {
         compLead.setOrderStatus(OrderStatus.NEW);
         compLead.setRecommendationStatus(RecommendationStatus.ACCEPTED_BY_CLIENT);
         compLead.setExpectedService(ExceptedService.PAID_SERVICE);
+        compLead.setCreationDate(new Date());
         compLeadService.save(compLead);
     }
 
