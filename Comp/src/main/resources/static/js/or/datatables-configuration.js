@@ -142,7 +142,9 @@ $(document).ready(function() {
 
     $('.modal-container').on('click', '#modal-add-order #send', function (e) {
         if(new Validator().valid()) {
-            sendFormByAjax('form', false, function() {
+
+            sendFormByAjax.call(this, 'form', false, function() {
+                document.getElementById('form').reset();
                 addPositiveMessage("Dane zostały prawidłowo zapisane w bazie danych.</br>Możesz dodać kolejne zgłoszenie lub zamknąć okno.");
                 $table.ajax.reload();
             });

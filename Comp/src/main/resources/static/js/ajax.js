@@ -4,8 +4,9 @@ function sendFormByAjax(idForm, isAttachment, fun) {
     if(isAttachment) contentForm = new FormData(($('#'+idForm))[0]);
     else contentForm = $('#'+idForm).serialize();
     var $button = $(this);
-    if($button.data('requestRunning')) return;
-    $button.data('requestRunning', true);
+
+    if($button.attr('requestRunning') === 'true') { return; }
+    $button.attr('requestRunning', true);
 
     $.ajax({
         type: $form.attr('method'),
@@ -25,7 +26,7 @@ function sendFormByAjax(idForm, isAttachment, fun) {
             }
         },
         complete : function() {
-            $button.data('requestRunning', false);
+            $button.attr('requestRunning', false);
         },
         statusCode: {
             500: function() {
