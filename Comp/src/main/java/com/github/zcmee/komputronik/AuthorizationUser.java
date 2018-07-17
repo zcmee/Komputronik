@@ -10,23 +10,27 @@ import java.util.Collections;
 import java.util.List;
 
 public class AuthorizationUser implements UserDetails {
+
+    private static transient final List<SimpleGrantedAuthority> USER_OR = Collections.singletonList(new SimpleGrantedAuthority("USER_OR"));
+
+    private static transient final List<SimpleGrantedAuthority> USER_OPL = Collections.singletonList(new SimpleGrantedAuthority("USER_OPL"));
+
     private final User user;
+
     private final List<? extends GrantedAuthority> authorities;
 
     public AuthorizationUser(User user) {
         this.user = user;
-
-        switch(user.getAccountType()) {
-            case COMP_INSTALATOR :
-                authorities = Collections.singletonList(new SimpleGrantedAuthority("USER_OR"));
-            break;
-            case COMP_OPL :
-                authorities = Collections.singletonList(new SimpleGrantedAuthority("USER_OPL"));
-            break;
+        switch (user.getAccountType()) {
+            case COMP_INSTALATOR:
+                authorities = USER_OR;
+                break;
+            case COMP_OPL:
+                authorities = USER_OPL;
+                break;
             default:
                 authorities = Collections.emptyList();
         }
-
     }
 
     @Override
