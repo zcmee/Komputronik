@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    jdbc-url: jdbc:mysql://localhost:3306/spring?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false
+    username: root
+    password: 123456asd
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    connection-timeout: 30000 #30sec
+    maximum-pool-size: 10
+    minimum-idle: 1 #one extra idle connection
+    idle-timeout: 20000 #2min
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        type: trace
+        synonyms: true
