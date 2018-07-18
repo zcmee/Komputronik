@@ -1,4 +1,4 @@
-<div id="comp-lead-modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div id="modal-change-order" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -21,13 +21,13 @@
                         <div class="col-lg-4 col-md-6 col-xs-12">
                             <div class="form-group">
                                 <label for="creation-date">Data utworzenia:</label>
-                                <input id="creation-date" type="text" class="form-control" readonly/>
+                                <input id="creation-date" type="text" class="form-control" value="{{creationDate}}" readonly/>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-xs-12">
                             <div class="form-group">
                                 <label for="company-name">Nazwa firmy:</label>
-                                <input id="company-name" type="text" class="form-control" readonly />
+                                <input id="company-name" type="text" class="form-control" value="{{companyName}}" readonly />
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-xs-12">
@@ -39,13 +39,13 @@
                         <div class="col-lg-4 col-md-6 col-xs-12">
                             <div class="form-group">
                                 <label for="contact-person">Osoba kontaktowa:</label>
-                                <input id="contact-person" type="text" class="form-control" readonly />
+                                <input id="contact-person" type="text" class="form-control" value="{{contactPerson}}" readonly />
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-xs-12">
                             <div class="form-group">
                                 <label for="contact-person-phone">Nr Telefonu:</label>
-                                <input id="contact-person-phone" type="text" class="form-control" readonly />
+                                <input id="contact-person-phone" type="text" class="form-control" value="{{contactPersonPhone}}" readonly />
                             </div>
                         </div>
                     </div>
@@ -58,11 +58,13 @@
                             <div class="form-group">
                                 <label for="recommendation-status">Status Comp:</label>
                                 <select id="recommendation-status" class="form-control" name="recommendationStatus" disabled>
+                                {{#select recommendationStatus.first}}
                                     <option value="1798542">Nowy</option>
                                     <option value="1807159">Zaakceptowane przez klienta</option>
                                     <option value="1807160">Odrzucone przez klienta</option>
                                     <option value="1798543">Zamówienie</option>
                                     <option value="1798544">Rezygnacja</option>
+                                {{/select}}
                                 </select>
                             </div>
                         </div>
@@ -70,22 +72,24 @@
                             <div class="form-group">
                                 <label for="excepted-service">Oczekiwana usługa:</label>
                                 <select id="excepted-service" class="form-control" name="expectedService" disabled>
+                                {{#select expectedService.first}}
                                     <option value="1798539">Mobile</option>
                                     <option value="1798540">Fix - Bezpłatny</option>
                                     <option value="1798541">Fix - Instalacja płatna</option>
+                                {{/select}}
                                 </select>
                             </div>
                         </div>
-
                         <div class="col-lg-4 col-md-6 col-xs-12">
                             <div class="form-group">
-                                <label for="expected-installation-date" class="control-label">Preferowana data instalacji:</label>
-                                <div class="input-group date datepicker" data-provide="datepicker">
-                                    <input id="expected-installation-date" type="text" class="form-control" name="expectedInstallationDate" disabled />
-                                    <div class="input-group-addon">
-                                        <span class="glyphicon glyphicon-th"></span>
-                                    </div>
-                                </div>
+                                <label for="contact-person-phone">Nr Telefonu:</label>
+                                <input id="contact-person-phone" type="text" class="form-control" value="{{contactPersonPhone}}" readonly />
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label for="contact-person-phone">Oczekiwana data instalacji:</label>
+                                <input id="contact-person-phone" type="text" class="form-control" value="{{dateFormatter expectedInstallationDate}}" readonly />
                             </div>
                         </div>
                     </div>
@@ -96,15 +100,17 @@
                         <div class="col-lg-4 col-md-6 col-xs-12">
                             <label for="order-status">Stan OPL:</label>
                             <select id="order-status" class="form-control" name="orderStatus">
+                            {{#select orderStatus.first}}
                                 <option value="1798552">Nowy</option>
                                 <option value="1798545">Realizacja</option>
                                 <option value="1798546">Anulacja</option>
+                            {{/select}}
                             </select>
                         </div>
                         <div class="col-lg-4 col-md-6 col-xs-12">
                             <div class="form-group">
                                 <label for="id-tel">Nr TEL:</label>
-                                <input id="id-tel" type="text" class="form-control" maxlength="15" name="idTel" />
+                                <input id="id-tel" type="text" class="form-control" maxlength="15" value="{{idTel}}" name="idTel" />
                             </div>
                         </div>
                     </div>

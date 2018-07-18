@@ -78,37 +78,28 @@ $(document).ready(function() {
             {'data': 'expectedService'},
             {'data': 'expectedInstallationDate'},
         ],
-    } );
+    });
 
      $('#example tbody').on('click', 'td:not(:first-child)', function (e) {
         var data = table.row( $(this).parent() ).data();
         var compId = data['id'];
-        $("#error-message").removeClass("alert-success")
-                           .removeClass("alert-danger")
-                           .html("");
+        cleanMessage();
 
         $.get( "compleads/" + compId, function( data ) {
             var fullUserName = data.user.firstName + " " + data.user.lastName;
-
-            $("#comp-lead-modal #id-complaint").html(data.id);
-            $("#comp-lead-modal #id-tel").val(data.idTel);
-            $("#comp-lead-modal #nip").val(data.nip);
-            $("#comp-lead-modal #company-name").val(data.companyName);
-            $("#comp-lead-modal #id").val(data.id);
-            $("#comp-lead-modal #contact-person").val(data.contactPerson);
-            $("#comp-lead-modal #contact-person-phone").val(data.contactPersonPhone);
-            $("#comp-lead-modal #excepted-service").val(data.expectedService.first).change();
-            $("#comp-lead-modal #order-status").val(data.orderStatus.first).change();
-            $("#comp-lead-modal #recommendation-status").val(data.recommendationStatus.first).change();
-            $("#comp-lead-modal #creation-date").val(moment(data.creationDate).format("YYYY-MM-DD"));
-            if(data.expectedInstallationDate !== null) { $("#comp-lead-modal #expected-installation-date").val(moment(data.expectedInstallationDate).format("YYYY-MM-DD")); }
+            $('.modal-container').load("components/opl/change-order.hbs",function(template) {
+                var template = Handlebars.compile(template);
+                $(this).html(template(data));
+                $('#modal-change-order').modal({show:true});
+            });
+        }).fail(function() {
+            toastr.error('Nie udało się pobrać szczegółów zgłoszenia');
         });
 
-        $('#comp-lead-modal').modal({show:true});
      });
 
-    $("#send").click(function (e) {
-        var telIdPattern = /^()$|^[a-zA-Z0-9]{12,15}$/gm;
+    $('.modal-container').on('click', '#modal-change-order #send', function (e) {
+        var telIdPattern = /^()$|^[a-zA-Z0-9]{15}$/gm;
         var orderStatus = $("#comp-lead-modal #order-status").val();
         var telId = $("#comp-lead-modal #id-tel").val();
         var isTelIdCorrect = telIdPattern.test(telId);
