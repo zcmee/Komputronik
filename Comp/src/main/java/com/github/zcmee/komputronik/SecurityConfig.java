@@ -29,7 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .logout().logoutSuccessUrl("/")
             .and()
             .csrf().disable()
-            .headers().cacheControl();
+            .headers().cacheControl()
+            .and()
+            .frameOptions().disable();
     }
 
     @Override

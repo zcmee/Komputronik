@@ -1,12 +1,11 @@
 package com.github.zcmee.komputronik.services;
 
-
+import com.github.zcmee.komputronik.UserAuthentication;
+import com.github.zcmee.komputronik.entities.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import com.github.zcmee.komputronik.AuthorizationUser;
-import com.github.zcmee.komputronik.entities.User;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -19,7 +18,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String login) {
         User currentUser = userService.findByLogin(login);
-        if (currentUser != null) { return new AuthorizationUser(currentUser); }
-        throw new UsernameNotFoundException("User not found for login: " + login);
+        if (currentUser == null)
+            throw new UsernameNotFoundException("User not found for login: " + login);
+        return new UserAuthentication(currentUser);
     }
 }

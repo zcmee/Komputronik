@@ -1,6 +1,6 @@
 package com.github.zcmee.komputronik.controllers;
 
-import com.github.zcmee.komputronik.AuthorizationUser;
+import com.github.zcmee.komputronik.UserAuthentication;
 import com.github.zcmee.komputronik.dictionaries.ExceptedService;
 import com.github.zcmee.komputronik.dictionaries.OrderStatus;
 import com.github.zcmee.komputronik.dictionaries.RecommendationStatus;
@@ -22,6 +22,7 @@ import java.util.List;
 @RequestMapping("compleads")
 public class CompLeadController {
     private final ModelMapper modelMapper;
+
     private final CompLeadService compLeadService;
 
     public CompLeadController(ModelMapper modelMapper, CompLeadService compLeadService) {
@@ -51,8 +52,7 @@ public class CompLeadController {
 
     @PostMapping("add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(@ModelAttribute CompLeadAddDTO compLeadAddDTO,
-                    @AuthenticationPrincipal AuthorizationUser authenticatedUser) {
+    public void add(@ModelAttribute CompLeadAddDTO compLeadAddDTO, @AuthenticationPrincipal UserAuthentication authenticatedUser) {
         CompLead compLead = modelMapper.map(compLeadAddDTO, CompLead.class);
 
         compLead.setUser(authenticatedUser.getUser());
